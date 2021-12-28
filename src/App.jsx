@@ -27,9 +27,8 @@ function App() {
 
   const handleOnDeleteClick = client => {
     if (confirm(`¿Estás seguro que deseas eliminar el cliente: ${ client.name }?`)) {
-      const newClients = [ ...clients ].splice( clients.indexOf(client), 1 )
+      const newClients = clients.filter( c => c.id !== client.id )
       setClients( newClients )
-      return;
     }
   }
 
@@ -38,9 +37,8 @@ function App() {
   }, [])
   
   useEffect(() => {
-    if(clients.length) {
+    if (clients.length) {
       localStorage.setItem('clients', JSON.stringify(clients))
-      return;
     }
   }, [clients])
 
